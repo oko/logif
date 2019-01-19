@@ -5,5 +5,25 @@ This Go package implements a levelled logging interface -- in other words, a log
 * **Separates interface and implementation:** the `logif.Logger` interface can be implemented by any chosen subsystem
 * **No -vmodule or -tracelocation support:** these may be considered if I come across a need for them or a suitable PR is submitted
 
+## Quick Start
+
+The library ships with a default logger preconfigured based on the standard library's `log` package:
+
+```
+package main
+
+import (
+	"github.com/oko/logif"
+)
+
+func main() {
+	logif.Errorf("Hello world!")
+	logif.SetLevel(logif.LevelDebug)
+	logif.Debugf("%#v", logif.DefaultLogger)
+}
+```
+
+You can change the default logger (which is used by `logif`'s top-level Debugf/Infof/Warningf/Errorf functions) by setting `logif.DefaultLogger` to a type implementing the `logif.Logger` interface.
+
 ## License
 This library is licensed under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0.txt).
