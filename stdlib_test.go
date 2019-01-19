@@ -108,12 +108,12 @@ func TestStdlibLogger_Debugging(t *testing.T) {
 	}{
 		{
 			"0",
-			fields{verbosity:0, debug:0, parent: nil},
+			fields{verbosity: 0, debug: 0, parent: nil},
 			0,
 		},
 		{
 			"1",
-			fields{verbosity:0, debug:1, parent: nil},
+			fields{verbosity: 0, debug: 1, parent: nil},
 			1,
 		},
 	}
@@ -168,16 +168,16 @@ func TestStdlibLogger_Errorf(t *testing.T) {
 		verbosity int
 		debug     int
 		parent    *StdlibLogger
-		level int
+		level     int
 	}
 	type args struct {
 		frmt string
 		args []interface{}
 	}
 	tests := []struct {
-		name   string
-		fields fields
-		args   args
+		name    string
+		fields  fields
+		args    args
 		contain string
 	}{
 		{
@@ -199,7 +199,7 @@ func TestStdlibLogger_Errorf(t *testing.T) {
 				verbosity: tt.fields.verbosity,
 				debug:     tt.fields.debug,
 				parent:    tt.fields.parent,
-				level: tt.fields.level,
+				level:     tt.fields.level,
 			}
 			var buf bytes.Buffer
 			log.SetOutput(&buf)
@@ -216,16 +216,16 @@ func TestStdlibLogger_Warningf(t *testing.T) {
 		verbosity int
 		debug     int
 		parent    *StdlibLogger
-		level int
+		level     int
 	}
 	type args struct {
 		frmt string
 		args []interface{}
 	}
 	tests := []struct {
-		name   string
-		fields fields
-		args   args
+		name    string
+		fields  fields
+		args    args
 		contain string
 	}{
 		{
@@ -250,7 +250,7 @@ func TestStdlibLogger_Warningf(t *testing.T) {
 			}
 			var buf bytes.Buffer
 			log.SetOutput(&buf)
-			s.Warningf( tt.args.frmt, tt.args.args...)
+			s.Warningf(tt.args.frmt, tt.args.args...)
 			if !strings.Contains(buf.String(), tt.contain) {
 				t.Errorf("did not get appropriate Warningf output: %s expected to contain %s", buf.String(), tt.contain)
 			}
@@ -263,16 +263,16 @@ func TestStdlibLogger_Infof(t *testing.T) {
 		verbosity int
 		debug     int
 		parent    *StdlibLogger
-		level int
+		level     int
 	}
 	type args struct {
 		frmt string
 		args []interface{}
 	}
 	tests := []struct {
-		name   string
-		fields fields
-		args   args
+		name    string
+		fields  fields
+		args    args
 		contain string
 	}{
 		{
@@ -297,7 +297,7 @@ func TestStdlibLogger_Infof(t *testing.T) {
 			}
 			var buf bytes.Buffer
 			log.SetOutput(&buf)
-			s.Infof( tt.args.frmt, tt.args.args...)
+			s.Infof(tt.args.frmt, tt.args.args...)
 			if !strings.Contains(buf.String(), tt.contain) {
 				t.Errorf("did not get appropriate Infof output: %s expected to contain %s", buf.String(), tt.contain)
 			}
@@ -310,16 +310,16 @@ func TestStdlibLogger_Debugf(t *testing.T) {
 		verbosity int
 		debug     int
 		parent    *StdlibLogger
-		level int
+		level     int
 	}
 	type args struct {
 		frmt string
 		args []interface{}
 	}
 	tests := []struct {
-		name   string
-		fields fields
-		args   args
+		name    string
+		fields  fields
+		args    args
 		contain string
 	}{
 		{
@@ -344,7 +344,7 @@ func TestStdlibLogger_Debugf(t *testing.T) {
 			}
 			var buf bytes.Buffer
 			log.SetOutput(&buf)
-			s.Debugf( tt.args.frmt, tt.args.args...)
+			s.Debugf(tt.args.frmt, tt.args.args...)
 			if !strings.Contains(buf.String(), tt.contain) {
 				t.Errorf("did not get appropriate Debugf output: %s expected to contain %s", buf.String(), tt.contain)
 			}
@@ -357,15 +357,15 @@ func TestStdlibLogger_V(t *testing.T) {
 		verbosity int
 		debug     int
 		parent    *StdlibLogger
-		level int
+		level     int
 	}
 	type args struct {
 		v int
 	}
 	tests := []struct {
-		name   string
-		fields fields
-		args   args
+		name         string
+		fields       fields
+		args         args
 		shouldOutput bool
 	}{
 		{
@@ -399,7 +399,7 @@ func TestStdlibLogger_V(t *testing.T) {
 				verbosity: tt.fields.verbosity,
 				debug:     tt.fields.debug,
 				parent:    tt.fields.parent,
-				level: tt.fields.level,
+				level:     tt.fields.level,
 			}
 			var buf bytes.Buffer
 			log.SetOutput(&buf)
@@ -422,15 +422,15 @@ func TestStdlibLogger_D(t *testing.T) {
 		verbosity int
 		debug     int
 		parent    *StdlibLogger
-		level int
+		level     int
 	}
 	type args struct {
 		d int
 	}
 	tests := []struct {
-		name   string
-		fields fields
-		args   args
+		name         string
+		fields       fields
+		args         args
 		shouldOutput bool
 	}{
 		{
@@ -464,7 +464,7 @@ func TestStdlibLogger_D(t *testing.T) {
 				verbosity: tt.fields.verbosity,
 				debug:     tt.fields.debug,
 				parent:    tt.fields.parent,
-				level: tt.fields.level,
+				level:     tt.fields.level,
 			}
 			var buf bytes.Buffer
 			log.SetOutput(&buf)
@@ -485,17 +485,17 @@ func TestStdlibLogger_D(t *testing.T) {
 func TestStdlibLogger_SetLevel(t *testing.T) {
 	s := &StdlibLogger{
 		verbosity: 0,
-		debug: 0,
-		parent: nil,
-		level: LevelDebug,
+		debug:     0,
+		parent:    nil,
+		level:     LevelDebug,
 	}
-	tests := []struct{
-		name string
-		level int
-		debug bool
-		info bool
+	tests := []struct {
+		name    string
+		level   int
+		debug   bool
+		info    bool
 		warning bool
-		error bool
+		error   bool
 	}{
 		{"debug", LevelDebug, true, true, true, true},
 		{"info", LevelInfo, false, true, true, true},

@@ -1,5 +1,6 @@
 package logif
 
+// Logging level constants
 const (
 	LevelDebug = iota
 	LevelInfo
