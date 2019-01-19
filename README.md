@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/oko/logif.svg?branch=master)](https://travis-ci.org/oko/logif)
 [![Go Report Card](https://goreportcard.com/badge/github.com/oko/logif)](https://goreportcard.com/report/github.com/oko/logif)
+[![codecov](https://codecov.io/gh/oko/logif/branch/master/graph/badge.svg)](https://codecov.io/gh/oko/logif)
 
 This Go package implements a levelled logging interface -- in other words, a logging interface that allows you to specify the "level" (importance) of a log message. This library is modelled after `glog` (one of the better-known levelled logging libraries in Go circles, made by Google), with two primary differences:
 
