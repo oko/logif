@@ -1,15 +1,36 @@
 package logif
 
-import "testing"
+import (
+	"log"
+	"os"
+	"testing"
+)
 
 func TestExample(t *testing.T) {
-	Debugf("hello %s", "user")
-	Infof("hello %s", "user")
-	Warningf("hello %s", "user")
-	Errorf("hello %s", "user")
+	log.SetOutput(os.Stdout)
+	Debugf("hello %s", "debug")
+	Infof("hello %s", "info")
+	Warningf("hello %s", "warning")
+	Errorf("hello %s", "error")
 
-	DefaultLogger.Debugf("hello %s", "user")
-	DefaultLogger.Infof("hello %s", "user")
-	DefaultLogger.Warningf("hello %s", "user")
-	DefaultLogger.Errorf("hello %s", "user")
+	DefaultLogger.Debugf("hello %s", "dl debug")
+	DefaultLogger.Infof("hello %s", "dl info")
+	DefaultLogger.Warningf("hello %s", "dl warning")
+	DefaultLogger.Errorf("hello %s", "dl error")
+
+	DefaultLogger.SetLevel(LevelDebug)
+	DefaultLogger.SetVerbosity(1)
+	DefaultLogger.V(1).Infof("level 1")
+	DefaultLogger.V(2).Infof("level 2 not shown")
+
+	if DefaultLogger.IsV(2) {
+		log.Printf("this line shouldn't print")
+		DefaultLogger.V(2).Infof("level 2 not shown")
+	}
+
+	DefaultLogger.SetVerbosity(3)
+	if DefaultLogger.IsV(2) {
+		log.Printf("this line should print")
+		DefaultLogger.V(2).Infof("level 2 shown when verbosity set to 3")
+	}
 }

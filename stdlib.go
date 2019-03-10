@@ -112,3 +112,19 @@ func (s *StdlibLogger) D(d int) Logger {
 		level:     s.level,
 	}
 }
+
+func (s *StdlibLogger) IsV(v int) bool {
+	if s.parent != nil {
+		return s.parent.IsV(v)
+	} else {
+		return v <= s.verbosity
+	}
+}
+
+func (s *StdlibLogger) IsD(d int) bool {
+	if s.parent != nil {
+		return s.parent.IsD(d)
+	} else {
+		return d <= s.debug
+	}
+}
