@@ -22,6 +22,10 @@ type Logger interface {
 	V(int) Logger
 	// D returns a child logger that will only log DEBUG if its parent's level is less than or equal to its own
 	D(int) Logger
+	// IsV returns whether verbosity is set at the given level
+	IsV(int) bool
+	// IsD returns whether debugging is set at the given level
+	IsD(int) bool
 	// Verbosity returns the current verbosity level for INFO messages
 	Verbosity() int
 	// Debugging returns the current debugging level for DEBUG messages
