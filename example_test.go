@@ -22,6 +22,22 @@ func TestExample(t *testing.T) {
 	DefaultLogger.SetVerbosity(1)
 	DefaultLogger.V(1).Infof("level 1")
 	DefaultLogger.V(2).Infof("level 2 not shown")
+	if IsV(1) {
+		log.Printf("level 1")
+	}
+	if IsV(2) {
+		log.Printf("level 2 not shown")
+	}
+
+	DefaultLogger.SetDebugging(1)
+	DefaultLogger.D(1).Debugf("debug level 1")
+	DefaultLogger.D(2).Debugf("debug level 2 not shown")
+	if IsD(1) {
+		log.Printf("level 1")
+	}
+	if IsD(2) {
+		log.Printf("level 2 not shown")
+	}
 
 	if DefaultLogger.IsV(2) {
 		log.Printf("this line shouldn't print")

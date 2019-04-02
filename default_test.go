@@ -412,6 +412,66 @@ func TestDefaultLogger_V(t *testing.T) {
 	}
 }
 
+func TestDefaultLogger_IsV(t *testing.T) {
+	type fields struct {
+		verbosity int
+		debug     int
+		parent    *StdlibLogger
+		level     int
+	}
+	type args struct {
+		v int
+	}
+	tests := []struct {
+		name         string
+		fields       fields
+		args         args
+		shouldOutput bool
+	}{
+		{
+			"0",
+			fields{0, 0, nil, LevelInfo},
+			args{0},
+			true,
+		},
+		{
+			"0",
+			fields{0, 0, nil, LevelInfo},
+			args{1},
+			false,
+		},
+		{
+			"0",
+			fields{0, 0, nil, LevelInfo},
+			args{3},
+			false,
+		},
+		{
+			"0",
+			fields{3, 0, nil, LevelInfo},
+			args{3},
+			true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			SetVerbosity(tt.fields.verbosity)
+			if IsV(tt.args.v) != tt.shouldOutput {
+				t.Errorf("IsV(%d) did not match expected output state: %t", tt.args.v, tt.shouldOutput)
+			}
+			if V(tt.args.v).IsV(tt.args.v) != tt.shouldOutput {
+				t.Errorf("IsV(%d) did not match expected output state: %t", tt.args.v, tt.shouldOutput)
+			}
+			if V(tt.args.v+1).IsV(tt.args.v) != tt.shouldOutput{
+				t.Errorf("IsV(%d) did not match expected output state: %t", tt.args.v, tt.shouldOutput)
+			}
+			if V(tt.args.v-1).IsV(tt.args.v) != tt.shouldOutput {
+				t.Errorf("IsV(%d) did not match expected output state: %t", tt.args.v, tt.shouldOutput)
+			}
+		})
+	}
+}
+
 func TestDefaultLogger_D(t *testing.T) {
 	type fields struct {
 		verbosity int
@@ -473,6 +533,67 @@ func TestDefaultLogger_D(t *testing.T) {
 				if buf.String() != "" {
 					t.Errorf("StdlibLogger.V(%d).Debugf(...) should not have printed but did", tt.args.d)
 				}
+			}
+		})
+	}
+}
+
+
+func TestDefaultLogger_IsD(t *testing.T) {
+	type fields struct {
+		verbosity int
+		debug     int
+		parent    *StdlibLogger
+		level     int
+	}
+	type args struct {
+		d int
+	}
+	tests := []struct {
+		name         string
+		fields       fields
+		args         args
+		shouldOutput bool
+	}{
+		{
+			"0 with 0 base",
+			fields{0, 0, nil, LevelDebug},
+			args{0},
+			true,
+		},
+		{
+			"1 with 0 base",
+			fields{0, 0, nil, LevelDebug},
+			args{1},
+			false,
+		},
+		{
+			"3 with 0 base",
+			fields{0, 0, nil, LevelDebug},
+			args{3},
+			false,
+		},
+		{
+			"3 with 3 base",
+			fields{0, 3, nil, LevelDebug},
+			args{3},
+			true,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			SetDebugging(tt.fields.debug)
+			if IsD(tt.args.d) != tt.shouldOutput {
+				t.Errorf("IsD(%d) did not match expected output state: %t", tt.args.d, tt.shouldOutput)
+			}
+			if D(tt.args.d).IsD(tt.args.d) != tt.shouldOutput {
+				t.Errorf("IsD(%d) did not match expected output state: %t", tt.args.d, tt.shouldOutput)
+			}
+			if D(tt.args.d+1).IsD(tt.args.d) != tt.shouldOutput{
+				t.Errorf("IsD(%d) did not match expected output state: %t", tt.args.d, tt.shouldOutput)
+			}
+			if D(tt.args.d-1).IsD(tt.args.d) != tt.shouldOutput {
+				t.Errorf("IsD(%d) did not match expected output state: %t", tt.args.d, tt.shouldOutput)
 			}
 		})
 	}

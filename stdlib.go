@@ -113,6 +113,7 @@ func (s *StdlibLogger) D(d int) Logger {
 	}
 }
 
+// IsV returns whether verbosity is set at the given level
 func (s *StdlibLogger) IsV(v int) bool {
 	if s.parent != nil {
 		return s.parent.IsV(v)
@@ -121,6 +122,7 @@ func (s *StdlibLogger) IsV(v int) bool {
 	}
 }
 
+// IsD returns whether debugging is set at the given level
 func (s *StdlibLogger) IsD(d int) bool {
 	if s.parent != nil {
 		return s.parent.IsD(d)

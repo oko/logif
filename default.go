@@ -33,6 +33,16 @@ func D(d int) Logger {
 	return DefaultLogger.D(d)
 }
 
+// IsV returns whether verbosity is set at the given level
+func IsV(v int) bool {
+	return DefaultLogger.IsV(v)
+}
+
+// IsD returns whether debugging is set at the given level
+func IsD(d int) bool {
+	return DefaultLogger.IsD(d)
+}
+
 // Verbosity returns the default logger verbosity
 func Verbosity() int {
 	return DefaultLogger.Verbosity()
