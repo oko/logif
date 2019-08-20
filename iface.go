@@ -1,13 +1,5 @@
 package logif
 
-// Logging level constants
-const (
-	LevelDebug = iota
-	LevelInfo
-	LevelWarning
-	LevelError
-)
-
 // Logger defines the interface for a logger which supports independently levelled info and debug logs
 type Logger interface {
 	// Errorf logs formatted errors
