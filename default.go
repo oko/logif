@@ -1,7 +1,7 @@
 package logif
 
 // DefaultLogger stores the Logger implementation used by the logif top level functions
-var DefaultLogger = NewStdlibLogger()
+var DefaultLogger Logger = NewStdlibLogger()
 
 // Errorf logs a formatted message at ERROR level
 func Errorf(fmt string, args ...interface{}) {
@@ -61,6 +61,11 @@ func Debugging() int {
 // SetDebugging sets the default logger debugging verbosity
 func SetDebugging(d int) {
 	DefaultLogger.SetDebugging(d)
+}
+
+// Level returns the default logger's logging level
+func Level() int {
+	return DefaultLogger.Level()
 }
 
 // SetLevel sets the default logger's overall level threshold

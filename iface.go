@@ -22,6 +22,8 @@ type Logger interface {
 	Verbosity() int
 	// Debugging returns the current debugging level for DEBUG messages
 	Debugging() int
+	// Level returns the current logging level
+	Level() int
 	// SetVerbosity sets the logger's verbosity level for INFO messages
 	SetVerbosity(int)
 	// SetVerbosity sets the logger's debugging level for DEBUG messages
