@@ -612,6 +612,42 @@ func TestStdlibLogger_IsD(t *testing.T) {
 	}
 }
 
+func TestStdlibLogger_Level(t *testing.T) {
+	type fields struct {
+		level  int
+		debug  int
+		parent *StdlibLogger
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		want   int
+	}{
+		{
+			"0",
+			fields{0, 0, nil},
+			0,
+		},
+		{
+			"1",
+			fields{1, 0, nil},
+			1,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			s := &StdlibLogger{
+				level:  tt.fields.level,
+				debug:  tt.fields.debug,
+				parent: tt.fields.parent,
+			}
+			if got := s.Level(); got != tt.want {
+				t.Errorf("StdlibLogger.Level() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 func TestStdlibLogger_SetLevel(t *testing.T) {
 	s := &StdlibLogger{
 		verbosity: 0,

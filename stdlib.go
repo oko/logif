@@ -88,6 +88,11 @@ func (s *StdlibLogger) Debugf(frmt string, args ...interface{}) {
 	}
 }
 
+// Level sets the logger's overall level threshold
+func (s *StdlibLogger) Level() int {
+	return s.level
+}
+
 // SetLevel sets the default logger's overall level threshold
 func (s *StdlibLogger) SetLevel(l int) {
 	s.level = l

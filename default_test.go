@@ -73,7 +73,7 @@ func TestDefaultLogger_SetVerbosity(t *testing.T) {
 			}
 			DefaultLogger = s
 			SetVerbosity(tt.args.v)
-			if DefaultLogger.verbosity != tt.args.v {
+			if DefaultLogger.Verbosity() != tt.args.v {
 				t.Errorf("SetVerbosity did not set verbosity correctly")
 			}
 		})
@@ -146,7 +146,7 @@ func TestDefaultLogger_SetDebugging(t *testing.T) {
 			}
 			DefaultLogger = s
 			SetDebugging(tt.args.d)
-			if DefaultLogger.verbosity != tt.args.d {
+			if DefaultLogger.Verbosity() != tt.args.d {
 				t.Errorf("SetDebugging did not set debugging correctly")
 			}
 		})
@@ -593,6 +593,43 @@ func TestDefaultLogger_IsD(t *testing.T) {
 			}
 			if D(tt.args.d-1).IsD(tt.args.d) != tt.shouldOutput {
 				t.Errorf("IsD(%d) did not match expected output state: %t", tt.args.d, tt.shouldOutput)
+			}
+		})
+	}
+}
+
+func TestDefaultLogger_Level(t *testing.T) {
+	type fields struct {
+		level  int
+		debug  int
+		parent *StdlibLogger
+	}
+	tests := []struct {
+		name   string
+		fields fields
+		want   int
+	}{
+		{
+			"0",
+			fields{0, 0, nil},
+			0,
+		},
+		{
+			"1",
+			fields{1, 0, nil},
+			1,
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			s := &StdlibLogger{
+				level:  tt.fields.level,
+				debug:  tt.fields.debug,
+				parent: tt.fields.parent,
+			}
+			DefaultLogger = s
+			if got := Level(); got != tt.want {
+				t.Errorf("StdlibLogger.Level() = %v, want %v", got, tt.want)
 			}
 		})
 	}
