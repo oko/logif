@@ -462,7 +462,7 @@ func TestDefaultLogger_IsV(t *testing.T) {
 			if V(tt.args.v).IsV(tt.args.v) != tt.shouldOutput {
 				t.Errorf("IsV(%d) did not match expected output state: %t", tt.args.v, tt.shouldOutput)
 			}
-			if V(tt.args.v+1).IsV(tt.args.v) != tt.shouldOutput{
+			if V(tt.args.v+1).IsV(tt.args.v) != tt.shouldOutput {
 				t.Errorf("IsV(%d) did not match expected output state: %t", tt.args.v, tt.shouldOutput)
 			}
 			if V(tt.args.v-1).IsV(tt.args.v) != tt.shouldOutput {
@@ -538,7 +538,6 @@ func TestDefaultLogger_D(t *testing.T) {
 	}
 }
 
-
 func TestDefaultLogger_IsD(t *testing.T) {
 	type fields struct {
 		verbosity int
@@ -589,7 +588,7 @@ func TestDefaultLogger_IsD(t *testing.T) {
 			if D(tt.args.d).IsD(tt.args.d) != tt.shouldOutput {
 				t.Errorf("IsD(%d) did not match expected output state: %t", tt.args.d, tt.shouldOutput)
 			}
-			if D(tt.args.d+1).IsD(tt.args.d) != tt.shouldOutput{
+			if D(tt.args.d+1).IsD(tt.args.d) != tt.shouldOutput {
 				t.Errorf("IsD(%d) did not match expected output state: %t", tt.args.d, tt.shouldOutput)
 			}
 			if D(tt.args.d-1).IsD(tt.args.d) != tt.shouldOutput {
